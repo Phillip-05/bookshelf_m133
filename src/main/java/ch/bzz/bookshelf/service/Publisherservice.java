@@ -43,7 +43,7 @@ public class Publisherservice {
     ) {
         Publisher publisher = DataHandler.getInstance().readPublisherByUUID(publisherUUID);
         return Response
-                .status(httpStatus)
+                .status(200)
                 .entity(publisher)
                 .build();
     }
