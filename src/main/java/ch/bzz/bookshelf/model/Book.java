@@ -1,5 +1,8 @@
 package ch.bzz.bookshelf.model;
 
+import ch.bzz.bookshelf.data.DataHandler;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.math.BigDecimal;
 
 public class Book {
@@ -7,6 +10,8 @@ public class Book {
     private String title;
     private String author;
     private String isbn;
+
+    @JsonIgnore
     private Publisher publisher;
     private BigDecimal price;
 
@@ -56,5 +61,25 @@ public class Book {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    /**
+     * gets the publisherUUID from the Publisher-object
+     * @return
+     */
+    public String getPublisherUUID() {
+        return getPublisher().getPublisherUUID();
+    }
+
+    /**
+     * creates a Publisher-object without the booklist
+     * @param publisherUUID
+     */
+    public void setPublisherUUID(String publisherUUID) {
+        setPublisher( new Publisher());
+        Publisher publisher = DataHandler.getInstance().readPublisherByUUID(publisherUUID);
+        getPublisher().setPublisherUUID(publisherUUID);
+        getPublisher().setPublisher(publisher.getPublisher());
+
     }
 }
