@@ -23,6 +23,7 @@ import java.util.List;
         @Produces(MediaType.APPLICATION_JSON)
         public Response listBooks() {
             List<Book> booklist = DataHandler.getInstance().readAllBooks();
+
             return Response
                     .status(200)
                     .entity(booklist)
